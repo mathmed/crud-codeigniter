@@ -9,9 +9,7 @@ Class Produtos_model extends CI_Model{
     }
 
     public function addProduto($dados = NULL){
-
         if($dados) $this->db->insert("produtos", $dados);
-
     }
 
     public function getProdutoByID($id = NULL){
@@ -33,8 +31,11 @@ Class Produtos_model extends CI_Model{
     public function editarProduto($dados = NULL, $id = NULL){
         if($dados && $id) $this->db->update("produtos", $dados, array("id" => $id));
     }
+    
+    public function apagarProduto($id = NULL){
+        if($id) $this->db->delete("produtos", array("id" => $id));
 
-
+    }
 }
 
 

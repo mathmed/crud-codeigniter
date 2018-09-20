@@ -84,4 +84,25 @@ class Produtos extends CI_Controller {
 		$this->load->view("editarProdutos", $dados);
 
 	}
+	
+	/* Página excluir produto */
+	public function apagar($id = NULL){
+
+		/* verifica se foi passado um id */
+		if($id == NULL) redirect("/");
+
+		/* carrega o model produtos */
+		$this->load->model("produtos_model", "produtos");
+
+		/* faz a consulta no bd para verificar se existe */
+		$query = $this->produtos->getProdutoByID($id);
+
+		/* verifica se foi encontrado algum registro */
+		if($query){
+			$this->produtos->apagarProduto($query->id);
+			redirect("/");
+		}
+		else redirect("/");
+
+	}
 }
