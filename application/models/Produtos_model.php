@@ -14,6 +14,26 @@ Class Produtos_model extends CI_Model{
 
     }
 
+    public function getProdutoByID($id = NULL){
+
+        if($id){
+            /* Condição do id */
+            $this->db->where("id", $id);
+
+            /* Definindo um limite */
+            $this->db->limit(1);
+
+            /* Requisitando e retornando */
+            $query = $this->db->get("produtos");
+            return $query->row();
+        }
+
+    }
+
+    public function editarProduto($dados = NULL, $id = NULL){
+        if($dados && $id) $this->db->update("produtos", $dados, array("id" => $id));
+    }
+
 
 }
 

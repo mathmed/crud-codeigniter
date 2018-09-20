@@ -11,7 +11,7 @@
     <meta name="description" content="Lista de produtos da tabela produtos">
     <meta name="author" content="blog.ismweb.com.br">
     
-    <title>Adicionar novo produto</title>
+    <title>Atualizar novo produto</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url("bootstrap/css/bootstrap.min.css") ?>" rel="stylesheet">
@@ -24,30 +24,32 @@
     <![endif]-->
   </head>
 
-  <body>    
+  <body>
+
 
     <div class="container">
 
       <div class="panel panel-default space-top">
-        <div class="panel-heading"><a href = "../" class = "a-style">Início</a> > Novo Produto</div>
+        <div class="panel-heading"><a href = "produtos" class = "a-style">Início</a> > Editar produto</div>
       </div>
 
       <div class="row">
-        <h1 class = "title green">Adicionar produto</h1>
+        <h1 class = "title green">Atualizar produto</h1>
         
-        <form action = "salvar" name = "form-salvar" method = "post">
+        <form action = "/crud-codeigniter/produtos/salvar/" name = "form-salvar" method = "post">
           <div class = "form-group">
 
-            <input class = "form-control space-bottom" name = "nome" placeholder = "Nome do produto">
-            <input class = "form-control space-bottom" name = "preco" placeholder = "Preço">
+            <input class = "form-control space-bottom" name = "nome" placeholder = "Nome do produto" value = "<?= $produto->nome ?>">
+            <input class = "form-control space-bottom" name = "preco" placeholder = "Preço" value = "<?= $produto->preco ?>">
             <label>Ativo:</label>
             <select class = "form-control space-bottom" name = "ativo">
-              <option value = "1">Sim</option>
-              <option value = "0">Não</option>
+              <option value = "1" <?php echo ($produto->ativo == 1) ? "selected = 'selected'" : '' ?>>Sim</option>
+              <option value = "0" <?php echo ($produto->ativo == 0) ? "selected = 'selected'" : '' ?>>Não</option>
             </select>
 
             <div class = "div-center">
-              <button type = "submit" class = "btn btn-success">Cadastrar</button>
+              <input type = "hidden" name = "id" value = "<?= $produto->id ?>">
+              <button type = "submit" class = "btn btn-success">Atualizar</button>
             </div>
 
           </div>
