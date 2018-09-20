@@ -39,6 +39,7 @@
                 <tr>
                   <th class="text-center">Produto</th>
                   <th class="text-right">Preço</th>
+                  <th class = "text-right">Status</th>
                   <th class="text-center">Açoes</th>
                 </tr>
             </thead>
@@ -49,7 +50,21 @@
                 {        
                     echo '<tr>';
                       echo '<td>'.$produto->nome.'</td>'; 
-                      echo '<td class="text-right">'.$produto->preco.'</td>'; 
+                      echo '<td class="text-right">'.$produto->preco.'</td>';
+
+                      echo "<td class = 'text-center'>";
+
+                      if($produto->ativo == 1)
+                        echo "<span class= 'label label-success'>
+                          <a href = 'produtos/status/$produto->id' title = 'Deixar inativo'>Ativo</a>
+                        </span>";
+
+                      else 
+                        echo "<span class ='label label-warning'>
+                          <a href = 'produtos/status/$produto->id' title = 'Deixar ativo'>Inativo</a>
+                        </span>";
+
+
                       echo '<td class="text-center">';
                         echo '<a href="produtos/editar/'.$produto->id.'" title="Editar cadastro" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>';
                         echo ' <a href="produtos/apagar/'.$produto->id.'" title="Apagar cadastro" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>';

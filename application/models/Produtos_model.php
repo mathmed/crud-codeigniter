@@ -36,6 +36,8 @@ Class Produtos_model extends CI_Model{
         if($id) $this->db->delete("produtos", array("id" => $id));
 
     }
+
+
 }
 
 

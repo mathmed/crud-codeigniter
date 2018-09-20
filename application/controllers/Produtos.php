@@ -30,11 +30,10 @@ class Produtos extends CI_Controller {
 
 	}
 
-	/* Página alterar produto */
+	/* Função alterar produto */
 	public function salvar(){
 
 		/* Valida o campo */
-
 		if($this->input->post("nome") == NULL){
 			echo "O Componente nome é obrigatório";
 			echo "<a href = '/crud-codeigniter/' title = 'Voltar'>Voltar</a>";
@@ -49,7 +48,6 @@ class Produtos extends CI_Controller {
 			$dados['ativo'] = $this->input->post("ativo");
 
 			/* Verifica se é um novo input ou uma att */
-			
 			/* Executa a função de atualizar do model */
 			if($this->input->post("id")) $this->produtos->editarProduto($dados, $this->input->post("id"));
 
@@ -85,7 +83,7 @@ class Produtos extends CI_Controller {
 
 	}
 	
-	/* Página excluir produto */
+	/* Função excluir produto */
 	public function apagar($id = NULL){
 
 		/* verifica se foi passado um id */
@@ -105,4 +103,36 @@ class Produtos extends CI_Controller {
 		else redirect("/");
 
 	}
+
+	/* Função para mudar o status do produto */
+	public function status($id = NULL){
+		/* verifica se foi passado um id */
+		if(!$id) redirect("/");
+
+		/* carregando o model produtos */
+		$this->load->model("produtos_model", "produtos");
+
+		/* fazendo uma consulta no BD para verificar se existe o registro */
+		$query = $this->produtos->getProdutoByID($id);
+
+		/* verifica se existe */
+		if(!$query) redirect("/");
+
+		else{
+			/* adicionando o novo status */
+			if($query->ativo == 1) $dados['ativo'] = 0;
+			else $dados['ativo'] = 1;
+
+			/* chamando a função que altera o status */
+			$this->produtos->editarProduto($dados, $query->id);
+
+			/* redirecionando */
+			redirect("/");
+
+		}
+		
+		/* criando array onde será guardado os dados */
+	}
+
+
 }
