@@ -14,7 +14,8 @@
     <title>Lista de produtos da tabela produtos</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">    
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">        
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -29,6 +30,8 @@
 
       <div class="row">
         <h1>Lista de produtos</h1>
+        
+        <a href = "produtos/add"><button class = "btn btn-success space-bottom">Adicionar produto</button></a>
 
         <table class="table table-bordered">
             

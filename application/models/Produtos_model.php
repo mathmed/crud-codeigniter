@@ -8,6 +8,12 @@ Class Produtos_model extends CI_Model{
         return $query->result();
     }
 
+    public function addProduto($dados = NULL){
+
+        if($dados) $this->db->insert("produtos", $dados);
+
+    }
+
 
 }
 

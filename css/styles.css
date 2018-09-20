@@ -1,0 +1,37 @@
+.space-bottom {
+    margin-bottom: 1em;
+}
+
+.space-top {
+    margin-top: 1em;
+}
+
+.a-style {
+    color: green;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.a-style:hover {
+    text-decoration: none;
+    color: green;
+    font-weight: bold;
+}
+
+.panel-heading {
+    font-size: 1.3em;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.green {
+    color: green;
+}
+
+.div-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
