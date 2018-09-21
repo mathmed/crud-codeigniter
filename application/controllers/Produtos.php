@@ -25,6 +25,8 @@ class Produtos extends CI_Controller {
 	/* Página adicionar produto */
 	public function add(){
 
+		/* verifica se o usuários está logado */
+		if(!$this->session->has_userdata("user")) redirect("/");
 
 		/* Carrega o model produtos */
 		$this->load->model("produtos_model", "produtos");
@@ -34,38 +36,11 @@ class Produtos extends CI_Controller {
 
 	}
 
-	/* Função alterar produto */
-	public function salvar(){
-
-		/* Valida o campo */
-		if($this->input->post("nome") == NULL){
-			echo "O Componente nome é obrigatório";
-			echo "<a href = '/crud-codeigniter/' title = 'Voltar'>Voltar</a>";
-		}else{
-
-			/* carrega o model */
-			$this->load->model("produtos_model", "produtos");
-
-			/* pega os dados do formulário e guarda em um array */
-			$dados['nome'] = $this->input->post("nome");
-			$dados['preco'] = $this->input->post("preco");
-			$dados['ativo'] = $this->input->post("ativo");
-
-			/* Verifica se é um novo input ou uma att */
-			/* Executa a função de atualizar do model */
-			if($this->input->post("id")) $this->produtos->editarProduto($dados, $this->input->post("id"));
-
-			/* Executa a função de adicionar do model */
-			else $this->produtos->addProduto($dados);
-
-			/* Redirecionando */
-			redirect("/");
-
-		}
-	}
-
 	/* Página editar produto */
 	public function editar($id = NULL){
+
+		/* verifica se o usuários está logado */
+		if(!$this->session->has_userdata("user")) redirect("/");
 
 		/* verifica se foi passado um id */
 		if(!$id) redirect("/");
@@ -96,22 +71,21 @@ class Produtos extends CI_Controller {
 		/* carrega o model produtos */
 		$this->load->model("produtos_model", "produtos");
 
-		/* faz a consulta no bd para verificar se existe */
-		$query = $this->produtos->getProdutoByID($id);
+		/* tenta excluir o produto */
+		$this->produtos->apagarProduto($id);
 
-		/* verifica se foi encontrado algum registro */
-		if($query){
-			$this->produtos->apagarProduto($query->id);
-			redirect("/");
-		}
-		else redirect("/");
-
+		/* redirecionando */
+		redirect("produtos");
 	}
 
 	/* Função para mudar o status do produto */
 	public function status($id = NULL){
+
+		/* verifica se o usuários está logado */
+		if(!$this->session->has_userdata("user")) redirect("/");
+
 		/* verifica se foi passado um id */
-		if(!$id) redirect("/");
+		if(!$id) redirect("produtos");
 
 		/* carregando o model produtos */
 		$this->load->model("produtos_model", "produtos");
@@ -120,7 +94,7 @@ class Produtos extends CI_Controller {
 		$query = $this->produtos->getProdutoByID($id);
 
 		/* verifica se existe */
-		if(!$query) redirect("/");
+		if(!$query) redirect("produtos");
 
 		else{
 			/* adicionando o novo status */
@@ -131,10 +105,42 @@ class Produtos extends CI_Controller {
 			$this->produtos->editarProduto($dados, $query->id);
 
 			/* redirecionando */
-			redirect("/");
+			redirect("produtos");
 
 		}
 	}
 
+	/* Função alterar produto */
+	public function salvar(){
+
+		/* verifica se o usuários está logado */
+		if(!$this->session->has_userdata("user")) redirect("/");
+
+		/* Valida o campo */
+		if($this->input->post("nome") == NULL){
+			echo "O Componente nome é obrigatório";
+			echo "<a href = '/crud-codeigniter/' title = 'Voltar'>Voltar</a>";
+		}else{
+
+			/* carrega o model */
+			$this->load->model("produtos_model", "produtos");
+
+			/* pega os dados do formulário e guarda em um array */
+			$dados['nome'] = $this->input->post("nome");
+			$dados['preco'] = $this->input->post("preco");
+			$dados['ativo'] = $this->input->post("ativo");
+
+			/* Verifica se é um novo input ou uma att */
+			/* Executa a função de atualizar do model */
+			if($this->input->post("id")) $this->produtos->editarProduto($dados, $this->input->post("id"));
+
+			/* Executa a função de adicionar do model */
+			else $this->produtos->addProduto($dados);
+
+			/* Redirecionando */
+			redirect("/produtos");
+
+		}
+	}
 
 }

@@ -30,7 +30,7 @@
     <div class="container">
 
       <div class="panel panel-default space-top">
-        <div class="panel-heading"><a href = "produtos" class = "a-style">Início</a> > Editar produto</div>
+        <div class="panel-heading"><a href = "/crud-codeigniter/produtos" class = "a-style">Início</a> > Editar produto</div>
       </div>
 
       <div class="row">

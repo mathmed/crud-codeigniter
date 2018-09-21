@@ -33,7 +33,24 @@ Class Produtos_model extends CI_Model{
     }
     
     public function apagarProduto($id = NULL){
-        if($id) $this->db->delete("produtos", array("id" => $id));
+
+        /* verifica se existe id */
+        if(!$id) return false;
+        
+        /* faz a consulta no bd para verificar se existe */
+		$query = $this->getProdutoByID($id);
+
+		/* verifica se foi encontrado algum registro */
+		if($query){
+
+            /* verifica se o registro foi apagado */
+            if($this->db->delete("produtos", array("id" => $id))){
+                $this->session->set_flashdata('msg_listar_produtos', "<div class = 'alert alert-success'>Produto apagado com sucesso</div>");
+            }
+            return true;
+        }
+        $this->session->set_flashdata('msg_listar_produtos', "<div class = 'alert alert-danger'>Não foi possível excluir o produto</div>");
+		return false;
 
     }
 

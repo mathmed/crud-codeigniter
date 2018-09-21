@@ -29,7 +29,7 @@
     <div class="container">
 
       <div class="panel panel-default space-top">
-        <div class="panel-heading"><a href = "../" class = "a-style">Início</a> > Novo Produto</div>
+        <div class="panel-heading"><a href = "../produtos" class = "a-style">Início</a> > Novo Produto</div>
       </div>
 
       <div class="row">

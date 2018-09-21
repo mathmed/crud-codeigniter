@@ -48,3 +48,7 @@
     font-size: 14px;
     color: white;
 }
+
+.alert {
+    margin-top: 1em;
+}

@@ -30,6 +30,7 @@ Class Login_model extends CI_Model{
                 /* retornando mensagem de sucesso */
                 return true;
             }
+            $this->session->set_flashdata('auth', "<div class = 'alert alert-danger'>Erro, usuário ou senha incorretos</div>");
             return false;
         }
     }

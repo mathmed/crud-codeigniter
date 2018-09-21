@@ -33,7 +33,6 @@ class Login extends CI_Controller {
 
         else{
             /* Caso o login não tenha sido efetuado, retornar com uma mensagem de erro */
-            $this->session->set_flashdata('auth', "<div class = 'alert alert-danger'>Erro, usuário ou senha incorretos</div>");
             redirect("/");
         }
     }

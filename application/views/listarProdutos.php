@@ -28,6 +28,7 @@
 
     <div class="container">
 
+      <?= $this->session->flashdata('msg_listar_produtos');?>
       <div class="row">
         <h1>Lista de produtos</h1>
         
