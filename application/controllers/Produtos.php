@@ -8,6 +8,10 @@ class Produtos extends CI_Controller {
 	/* primeira função que é chamada */
 	public function index(){
 
+		/* verifica se o usuários está logado */
+		if(!$this->session->has_userdata("user")) redirect("/");
+
+
 		/* Carregando o model (nome e apelido) */
 		$this->load->model("produtos_model", "produtos");
 
@@ -130,8 +134,6 @@ class Produtos extends CI_Controller {
 			redirect("/");
 
 		}
-		
-		/* criando array onde será guardado os dados */
 	}
 
 
